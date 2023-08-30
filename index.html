@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI Calculator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Edu+QLD+Beginner:wght@500&family=Libre+Baskerville&family=Sacramento&family=Solitreo&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        display: block;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="heroes"
+      style="
+        background: #000000;
+        color: white;
+        text-align: center;
+        padding: 30px;
+      "
+    >
+      <h1 style="font-family: 'Black Ops One', 'sans-serif'; font-size: 4em">
+        BMI Calculator
+      </h1>
+    </div>
+
+    <section class="container my-5">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Enter Your Data</h3>
+              <form>
+                <div class="form-group my-3">
+                  <label for="yourWeight">Your weight (kg):</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="yourWeight"
+                    placeholder="Enter your weight in kilograms"
+                  />
+                </div>
+                <div class="form-group mt-3">
+                  <label for="yourHeight">Your height (m):</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="yourHeight"
+                    placeholder="Enter your height in meters"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-primary my-3"
+                  id="submitBtn"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="jumbotron jumbotron-fluid"
+      style="
+        background: #000000;
+        color: white;
+        text-align: center;
+        padding: 100px 0;
+      "
+      id="results"
+    >
+      <div class="container">
+        <h2
+          class="display-4"
+          style="font-family: 'Black Ops One', 'sans-serif'"
+        >
+          Your BMI is: ???
+        </h2>
+      </div>
+    </section>
+  </body>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    let inputYourWeight = document.getElementById("yourWeight");
+    let inputYourHeight = document.getElementById("yourHeight");
+    let submitBtn = document.getElementById("submitBtn");
+    let bmiDisplay = document.querySelector("#results h2");
+
+    /* Attaching event listener to the submit button */
+    submitBtn.addEventListener("click", function (event) {
+      event.preventDefault();
+
+      /* Get values from form fields */
+      let yourWeight = inputYourWeight.value.trim();
+      let yourHeight = inputYourHeight.value.trim();
+
+      /* BMI Calculation
+        BMI <18.5, the output should be: "Your BMI is <bmi>, so you are underweight."
+        BMI 18.5-24.9, the output should be "Your BMI is <bmi>, so you have a normal weight."
+        BMI >24.9, the output should be "Your BMI is <bmi>, so you are overweight."
+            */
+      let bmi = yourWeight / Math.pow(yourHeight, 2);
+      bmi = Math.round(bmi);
+
+      /* Update the Jumbotron content with the calculated love percentage */
+      if (bmi <= 18.5) {
+        bmiDisplay.textContent = `Your BMI is: ${bmi}, so you are underweight.`;
+      }
+      // conditon 2 fix between
+      else if (bmi >= 24.9) {
+        bmiDisplay.textContent = `Your BMI is: ${bmi}, so you are overweight.`;
+      }
+      // conditon 3
+      else {
+        bmiDisplay.textContent = `Your BMI is: ${bmi}, so you have a normal weight.`;
+      }
+    });
+  </script>
+</html>
+bmiCalculator
